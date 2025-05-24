@@ -3,6 +3,7 @@ const route = require('./src/routes/routers');
 const socketio = require("socket.io");
 const http = require("http");
 const path = require('path');
+const errorHandler = require('./src/handlers/errorHandlers');
 
 const app = express();
 const server = http.createServer(app);
@@ -18,6 +19,8 @@ app.use(express.static(path.join(__dirname, 'src', 'public')));
 
 // Routes
 app.use(route);
+
+app.use(errorHandler.notfound);
 
 // Start server
 server.listen(3000, () => {
